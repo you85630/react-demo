@@ -8,6 +8,15 @@ class TodoItem extends Component{
 
     this.Delete = this.Delete.bind(this)
   }
+  //  此处为防止子组件被重复执行，提升性能
+  shouldComponentUpdate(nextProps, nextState) {
+    // 判断当前content是否和之前的content是否相同
+    if (nextProps.content !== this.props.content) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   render() {
     const { content } = this.props

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 
 // 引入组件
 import TodoItem from './components/TodoItem';
@@ -57,7 +58,21 @@ class TodoList extends Component {
     )
   }
 
+  // 获取Ajax数据
+  componentDidMount() {
+    axios.get('api/todolist')
+      .then((res) => {
+        this.setState(() => ({
+          list:[...res.data]
+        }))
+      })
+      .catch(() => {
+        console.log('err');
+    })
+  }
+
   InputChang(e) {
+    // setState为异步
     const value = e.target.value
     this.setState(() => ({
       inputValue: value
